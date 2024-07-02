@@ -1,0 +1,3 @@
+select a.tablespace_name, b.status from dba_data_files a, v$backup b where a.file_id=b.file# order by tablespace_name;
+
+alter database end backup;

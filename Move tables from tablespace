@@ -1,0 +1,3 @@
+Move all objects from old Tablespace to new Tablespace:
+
+brspace -c force -o process,time -u / -f tbreorg -a reorg -tablespace <OldTable> -t "*" -parallel 3 -degree 3 -newts <NewTable>

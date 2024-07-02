@@ -1,0 +1,5 @@
+ADD Request:
+tp addtobuffer F3DK9A30UK X2P client=000 pf=/usr/sap/trans/bin/TP_DOMAIN_X2P.PFL
+
+Import transport:
+tp import F3DK9A30UK F4D client=000 u126 pf=/usr/sap/trans/bin/TP_DOMAIN_F4P.PFL

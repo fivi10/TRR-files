@@ -1,0 +1,24 @@
+oracle user
+mkdir /oracle/AME/OWNSQL/INDEX_REBUILD
+cp -rp /install/sw_supply/scripts/oracle/INSTALL/INDEX_REBUILD/auto_index_rebuild_oct_2017.tar /oracle/AME/OWNSQL/INDEX_REBUILD
+cd /oracle/AME/OWNSQL/INDEX_REBUILD
+tar -xvf auto_index_rebuild_oct_2017.tar
+chgrp -R dba *
+#chmod -R 755 /oracle/AME/OWNSQL
+#chown oracle:oinstall /oracle/AME/OWNSQL
+
+s oraf9k
+cd /oracle/AME/OWNSQL/INDEX_REBUILD/SETUP
+sqlplus / as sysdba
+@setup_all.sql
+
+
+mkdir /oracle/AME/OWNSQL
+
+chmod -R 755 *
+
+Check Oracke Jobs:
+col job_name format a30
+set linesize 200
+select job_name, TO_CHAR(START_DATE,'DD.MM.YYYY:HH24:MI:SS') startdate, TO_CHAR(last_start_date,'dd.MM.YYYY:HH24:MI:SS') laststart, to_char(next_run_date,'DD.MM.YYYY:HH24:MI:SS') next_run from dba_scheduler_jobs where job_class = 'SAP_AUTO_REBUILD_INDEXES' order by job_name ;
+

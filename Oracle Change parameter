@@ -1,0 +1,9 @@
+ALTER SYSTEM SET sga_max_size=104000m scope=spfile;
+
+ALTER SYSTEM SET pga_aggregate_target=3072MB SCOPE=spfile;
+
+ALTER SYSTEM SET db_cache_size=90G SCOPE=spfile;
+
+ALTER SYSTEM SET shared_pool_size=8G SCOPE=spfile;
+
+ALTER SYSTEM SET pga_aggregate_target=10G SCOPE=spfile;

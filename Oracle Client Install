@@ -1,0 +1,24 @@
+cd /oracle/client/19x
+mkdir ocl_packages
+cd ocl_packages
+cp /install/sw_supply/ora/CLIENT/19/OCL_LINUX_X86_64/* .
+SAPCAR -xjf OCL1964.SAR -R .
+ls -ltr
+cd ..
+pwd
+
+su - root
+cd /oracle/client/19x
+cp ocl_packages/instantclient_19000/* instantclient_19000/
+
+[10/2 8:34 AM] Borlea, Radu-Lucian (EXTERN)
+/install/sw_supply/ora/CLIENT/19/OCL_LINUX_X86_64/* -- aici
+
+[10/2 8:37 AM] Borlea, Radu-Lucian (EXTERN)
+ln -s 19x 12
+ln -s 19x 12x
+ln -s 19x 122
+ln -s 19x 19
+ln -s 19x 11x_64
+ln -s 19x 10x_64
+

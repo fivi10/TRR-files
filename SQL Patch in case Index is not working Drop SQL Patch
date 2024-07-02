@@ -1,0 +1,31 @@
+1). Apply SQL Patch in case table index is not used, replace table and SQL Patch ID, in this case 3kw79ddb61a1t, @"SEL$1" remains.
+
+declare
+-- ### Customizing section start #################################################################
+vName varchar2(30) :='PATCH_SQL_ID_4hyr6xj09a991'; /* Name of the SQL Patch */
+vDescription varchar2(500) :='Force Index usage'; /* Description of the SQL Patch */
+vSQL_ID varchar2(13) :='4hyr6xj09a991'; /* SQL_ID of the statement */
+vHintText varchar2(500) :='INDEX("/VWK/EKAD_MTALOG"@"SEL$1" "/VWK/EKAD_MTALOGDO")'; /* The full hint text including query block name */
+vStatus varchar2(8) :='ENABLED'; /* ENABLED or DISABLED */
+-- ### Customizing section end ###################################################################
+vNameOutput varchar2(30);
+begin
+vDescription := vHintText||' '||vdescription;
+vNameOutput := dbms_sqldiag.create_sql_patch(
+sql_id => vSQL_ID,
+hint_text => vHintText,
+description => vDescription,
+name => vName);
+dbms_sqldiag.alter_sql_patch(vName,'STATUS',vStatus);
+end;
+/
+
+
+2). DROP SQL Patch
+
+begin
+  dbms_sqldiag.drop_sql_patch(name => 'PATCH_SQL_ID_4hyr6xj09a991');
+end;
+/
+
+Rerun for secondary System Refresh on K enviroment. Preactivity/Backup/Restore/Post Activity

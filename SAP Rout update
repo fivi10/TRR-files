@@ -1,0 +1,16 @@
+sudo /usr/sbin/service saprouter stop
+cd /usr/sap/saprouter/
+mkdir saprouter.06202022
+chmod 775 saprouter.06202022
+cp -rp * /usr/sap/saprouter/saprouter.06202022
+cd cryptolib_8544
+chmod 755 libslcryptokernel.so libsapcrypto.so sapgenpse
+chmod 664 sapcrypto.mf sapcrypto.lst libslcryptokernel.so.sha256
+cp -rp * ../
+cd ..
+cd sapr_1011
+chmod 755 saprouter niping
+chmod 664 patches.mf
+cp -rp * ../
+cd ..
+sudo /usr/sbin/service saprouter start

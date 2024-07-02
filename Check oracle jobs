@@ -1,0 +1,15 @@
+How to Check Running Oracle Jobs:
+set linesize 5000
+col OWNER format A10
+col JOB_NAME format A30 
+col COMMENTS format A60
+SELECT job_name, owner, enabled, state, comments
+FROM dba_scheduler_jobs;
+
+How to check Status of Oracle Jobs:
+set linesize 5000
+col JOB_NAME format A30
+SELECT log_id, job_name, status, to_char(log_date,'DD-MON-YYYY HH24:MI'), ERRORS, OUTPUT
+FROM dba_scheduler_job_run_details
+WHERE job_name = 'JOB_REB_INDEXES_D_PART_JK'
+ORDER BY job_name, log_date

@@ -1,0 +1,58 @@
+48284 - System cannot generate any more spool requests
+https://launchpad.support.sap.com/#/notes/48284
+Proceed as follows:
+
+1. Log on to the system in client 000 and call transaction SNRO.
+2. Select the object SPO_NUM and choose the following button: Number ranges.
+3. On the next screen, choose: Change Intervals.
+4. In the "To number" column, change the upper limit of interval 01 to 999,999, for example.
+
+https://launchpad.support.sap.com/#/notes/2635724
+2635724 - Monitor or Display Spool Range Limit and Status
+Run report RSPO_SHOW_SPO_NUM to display the Spool Number Range Interval. 
+
+https://launchpad.support.sap.com/#/notes/130978
+130978 - RSPO1041 - alternative to RSPO0041
+
+sapPM!fat2015
+
+
+Hallo André,
+Nur zur Information.
+In Bezug auf die Verwaltung von Hana Cockpit.
+Dies ist immer noch nicht im Bereich von Infosys.. Daher werden aktuelle und weitere Tickets an die Architekturwarteschlange gesendet.
+
+Dies wird nicht von Infosys gepflegt
+
+
+Es gab ein Missverständnis und Dejan war an der Fehlerbehebung für Hana Cockpit beteiligt. 
+Nach Klärung in unserem Team befindet sich Hana Cockpit noch nicht in der Infosys-Administration.
+Daher werden aktuelle und weitere Tickets an die Architekturwarteschlange gesendet.
+SAP message 537693 / 2022
+
+Dazu gehört auch die tracking der folgenden SAP-Ticket-Nachricht
+Dazu gehört auch das Tracking der folgenden SAP-Ticket-Nachricht
+
+Zur weiteren Klärung kann Ralph weitere Details liefern und mit Steffen besprechen
+
+
+Hallo Andreas,
+Das erste Problem bezog sich auf einen menschlichen Fehler. Zertifikat wurde fälschlicherweise bestellt, da dies in Zukunft durch die Umsetzung des 4-Augen-Prinzips vermieden wird.
+
+Das zweite (F7P) war ein WebDispatcher-Problem, das nach dem Neustart von WebDisp behoben wurde.
+
+Ich weiß, in den letzten zwei Wochen war die Kommunikation und vielleicht der Support für FJ Line etwas langsam. Ich kann bestätigen, dass in naher Zukunft ein neuer technischer Kollege für die FJ-Linie eingesetzt wird.
+
+
+Es gibt ein Problem mit Hana Cockpit, in der Ticketbeschreibung wird es auch erwähnt
+
+Nach VW-Verfahren ist für die Öffnung der Verbindung ein Ticket erforderlich. Deshalb hat Dejan das Ticket pro bono eröffnet.
+
+VW-Verfahren verlangen ein Ticket, damit eine Verbindung geöffnet werden kann
+
+Hallo André,
+Entschuldigung, das Ticket wurde nur geöffnet, damit SAP sich mit Hana Cockpit verbinden kann. Das ist bei VW so, und im Ticket sieht man auch die erwähnte SAP-Nachricht.
+
+Ich habe die Informationen aus der SAP-Nachricht in das Ticket eingefügt.
+
+Beim VW-Verfahren ist für den Verbindungsaufbau zu SAP ein Ticket erforderlich

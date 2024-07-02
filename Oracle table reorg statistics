@@ -1,0 +1,2 @@
+brconnect -u // -c -f stats -f allsel,collect -m A -t 'BKKNT' -p 1 -g 4
+brspace -c force -f tbreorg -t 'BKKNT' -p 1 -e 8

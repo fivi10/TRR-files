@@ -1,0 +1,12 @@
+Test:
+brbackup -c -p /oracle/AMS/sapprof/initAMS_REL.sap -t online_cons -u // -q
+
+Execute:
+brbackup -c -p /oracle/AMS/sapprof/initAMS_REL.sap -t online_cons -u //
+
+
+#RMAN online_cons
+brbackup -c -p /oracle/IKT/sapprof/initIKT_REL.sap -d rman_util -m full -t online_cons -u //
+
+#RMAN Normal
+brbackup -d rman_util -t online -m full -c -u //

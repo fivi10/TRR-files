@@ -1,0 +1,14 @@
+bsul2120:oraf5i 53> rman
+
+Recovery Manager: Release 19.0.0.0.0 - Production on Wed Jul 13 16:21:15 2022
+Version 19.13.0.0.0
+
+Copyright (c) 1982, 2019, Oracle and/or its affiliates.  All rights reserved.
+
+RMAN> connect target /
+
+connected to target database: F5I (DBID=135783637, not open)
+
+run { allocate channel sbt type 'sbt_tape';
+restore archivelog from sequence 2518;
+release channel sbt; }

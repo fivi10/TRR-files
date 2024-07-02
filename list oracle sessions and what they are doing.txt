@@ -1,0 +1,187 @@
+set pagesize 10000
+set linesize 200
+select sesion.sid,
+       rows_processed,
+       sesion.username,
+       optimizer_mode,
+       hash_value,
+       address,
+       cpu_time,
+       elapsed_time,
+       serial#,
+       sql_text
+  from v$sqlarea sqlarea, v$session sesion
+ where sesion.sql_hash_value = sqlarea.hash_value
+   and sesion.sql_address    = sqlarea.address
+   and sesion.username is not null;
+
+
+
+--------------------Progress----------------------------------
+select * from
+(
+  select
+     opname,
+     start_time,
+     target,
+     sofar,
+     totalwork,
+     units,
+     elapsed_seconds,
+     message
+   from
+        v$session_longops
+  order by start_time desc
+)
+where rownum <=1;
+
+----------------------------Replace sid with the sid from the first query
+
+select
+   sid,
+   message
+from
+   v$session_longops
+where
+   sid = 495
+order by
+   start_time;
+
+----------------------or
+column MESSAGE format A70
+select SOFAR,TOTALWORK,START_TIME,LAST_UPDATE_TIME,TIME_REMAINING,MESSAGE from v$session_longops where SID = '3';
+
+
+or 
+
+select * From v$session_longops where sid = 3 and serial# = 43129 and time_remaining > -0;
+
+======================estimate runtime remaining
+column TARGET format A10
+column SQL_FULLTEXT format A50
+column client_tool format A25
+column MAX_TIME_REMAINING_IN_MIN format A15
+column PARSING_SCHEMA_NAME format A10
+SELECT 
+opname
+target,
+ROUND( ( sofar / totalwork ), 4 ) * 100 Percentage_Complete,
+start_time,
+CEIL( time_remaining / 60 ) Max_Time_Remaining_In_Min,
+FLOOR( elapsed_seconds / 60 ) Time_Spent_In_Min,
+AR.sql_fulltext,
+AR.parsing_schema_name,
+AR.module Client_Tool
+FROM v$session_longops L, v$sqlarea AR
+WHERE L.sql_id = AR.sql_id
+AND totalwork > 0
+AND AR.users_executing > 0
+AND sofar != totalwork;
+
+================In case of a still running statement that is waiting for something check with
+http://facedba.blogspot.com/2014/09/vsessionwait-tips.html
+
+column EVENT format A30
+select SID,EVENT,WAIT_TIME,SECONDS_IN_WAIT,STATE,P1,P2 from v$session_wait where SID='3';
+
+select segment_name,segment_type from dba_extents where file_id = <P1>  and <P2> between block_id and block_id + blocks – 1;
+
+select segment_name,segment_type from dba_extents where file_id = 34  and 3858275 between block_id and block_id + blocks – 1;
+
+==============================List all sessions and their respective sql queries
+
+select
+   substr(s.username,1,18) username,
+   substr(s.program,1,15) program,
+   decode(s.command,
+     0,'No Command',
+     1,'Create Table',
+     2,'Insert',
+     3,'Select',
+     6,'Update',
+     7,'Delete',
+     9,'Create Index',
+     15,'Alter Table',
+     21,'Create View',
+     23,'Validate Index',
+     35,'Alter Database',
+     39,'Create Tablespace',
+     41,'Drop Tablespace',
+     40,'Alter Tablespace',
+     53,'Drop User',
+     62,'Analyze Table',
+     63,'Analyze Index',
+     s.command||': Other') command
+from 
+   v$session     s,
+   v$process     p,
+   v$transaction t,
+   v$rollstat    r,
+   v$rollname    n
+where s.paddr = p.addr
+and s.taddr = t.addr (+)
+and t.xidusn = r.usn (+)
+and r.usn = n.usn (+)
+order by 1;
+
+==========================list sessions===============================
+SELECT SID, SERIAL#, STATUS, SERVER FROM V$SESSION;
+select count(*), username from v$session group by username;
+
+
+
+SET HEADING OFF FEEDBACK OFF ECHO OFF PAGESIZE 0
+column table_owner format a15
+column table_name format a20
+column index_name format a20
+column column_name format a20
+select distinct 'ALTER INDEX "SAPDAT"."'||index_name||'" REBUILD ONLINE;' from dba_ind_columns where table_name like '/VWK/DSMD_OBJECT';
+select distinct 'ALTER INDEX "SAPDAT"."'||index_name||'" REBUILD ONLINE;' from dba_ind_columns where table_name like '/VWK/DSMD_IMPEDI';
+select distinct 'ALTER INDEX "SAPDAT"."'||index_name||'" REBUILD ONLINE;' from dba_ind_columns where table_name like '/VWK/DSMD_DEPEND';
+select distinct 'ALTER INDEX "SAPDAT"."'||index_name||'" REBUILD ONLINE;' from dba_ind_columns where table_name like '/VWK/DSMD_ERROR';
+select distinct 'ALTER INDEX "SAPDAT"."'||index_name||'" REBUILD ONLINE;' from dba_ind_columns where table_name like '/VWK/DSMD_OBJIND';
+
+
+ALTER INDEX "SAPDAT"."/VWK/DSMD_OBJECTRU" REBUILD ONLINE;                                                                                            
+ALTER INDEX "SAPDAT"."/VWK/DSMD_OBJECT~0" REBUILD ONLINE;
+ALTER INDEX "SAPDAT"."/VWK/DSMD_OBJECTKE" REBUILD ONLINE;
+ALTER INDEX "SAPDAT"."/VWK/DSMD_OBJECTA0" REBUILD ONLINE;
+ALTER INDEX "SAPDAT"."/VWK/DSMD_IMPEDICO" REBUILD ONLINE;
+ALTER INDEX "SAPDAT"."/VWK/DSMD_IMPEDIA0" REBUILD ONLINE;
+ALTER INDEX "SAPDAT"."/VWK/DSMD_IMPEDI~0" REBUILD ONLINE;
+ALTER INDEX "SAPDAT"."/VWK/DSMD_IMPEDIRU" REBUILD ONLINE;
+ALTER INDEX "SAPDAT"."/VWK/DSMD_DEPENDP0" REBUILD ONLINE;
+ALTER INDEX "SAPDAT"."/VWK/DSMD_DEPEND~0" REBUILD ONLINE;
+ALTER INDEX "SAPDAT"."/VWK/DSMD_DEPENDA0" REBUILD ONLINE;
+ALTER INDEX "SAPDAT"."/VWK/DSMD_DEPENDDE" REBUILD ONLINE;
+ALTER INDEX "SAPDAT"."/VWK/DSMD_ERROR~B0" REBUILD ONLINE;
+ALTER INDEX "SAPDAT"."/VWK/DSMD_ERROR~A0" REBUILD ONLINE;
+ALTER INDEX "SAPDAT"."/VWK/DSMD_ERROR~C0" REBUILD ONLINE;
+ALTER INDEX "SAPDAT"."/VWK/DSMD_ERROR~D0" REBUILD ONLINE;
+ALTER INDEX "SAPDAT"."/VWK/DSMD_ERROR~0" REBUILD ONLINE;
+
+j1$#^\BfG&;&$DjR
+
+
+ZGaFkieE-dA8}rRn]riyNeRsN<-rL~$G#l9rdmR
+ZGaFkieE-dA8}rRn]riyNeRsN<-rL~$G#l9rdmR
+
+ALTER PROFILE DEFAULT LIMIT PASSWORD_VERIFY_FUNCTION NULL;
+ALTER PROFILE SAPUPROF LIMIT PASSWORD_VERIFY_FUNCTION NULL;
+
+sdf4gZ_ETNqFUpGGA13df4gZj
+
+Dr6j_~1C561n8XsyrbS
+
+
+Josh  > Elen DB
+Backup >
+
+brspace -c force -o process,time -u / -f tbreorg -a reorg -tablespace PSAPDAT750 -t "*" -parallel 3 -degree 3 -newts PSAPDAT750X
+
+
+Hallo Nils,
+
+Diese Migration ist auch etwas anders, die Version dieses SAP-Systems ist sehr alt. 7.01.
+Dies erfordert mehr Vorbereitung, da ich alles von Grund auf neu installieren muss. Es kann sein, dass wir mehr Ausfallzeiten für sie benötigen.
+Dies wird jedoch nach dem ersten System geklärt

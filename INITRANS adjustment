@@ -1,0 +1,19 @@
+SELECT table_name, owner, ini_trans, max_trans FROM dba_tables WHERE table_name like 'BKK81';
+
+
+sqlplus "sapdat/pI_f7jA4PburISTS"
+
+ALTER TABLE "BKK81" INITRANS 25;
+ALTER INDEX "BKK81~0" INITRANS 50;
+
+select table_name,ini_trans from dba_tables where table_name in 'BKK81'; 
+
+SELECT INI_TRANS from dba_ind_partitions where index_name='*' and INDEX_OWNER='SAPDAT';
+
+SELECT INI_TRANS from dba_indexes where index_name ='BKK81~0';
+
+
+select table_name,ini_trans from dba_tables where table_name in 'BKK81';
+
+select table_name,ini_trans from dba_tables where table_name in 'BKK81~0';
+

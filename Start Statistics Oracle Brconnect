@@ -1,0 +1,2 @@
+brconnect -u // -c -f stats -f allsel,collect -m A -t '/VWK/EKAD_MTALOG' -p 1 -g 4
+brconnect -u // -c -f stats -t all

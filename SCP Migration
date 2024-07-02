@@ -1,0 +1,260 @@
+please book your PPMS hours on PP4662/15.
+
+TIME ZONEE FOR MEXICOOOOOOOOOOO
+
+/usr/isbr/home/isbr/dkx8vwq/check
+
+Setting DDIC User temporary to Service for TEO migration
+
+select username from dba_users where username like '%SAP%';
+
+:1,$s/a01f7p/a02f7p/g
+
+sappfpar check_formula pf=F7P_D04_a01f7p	 	 	 	Formulas	
+sappfpar check_unknown pf=<profile>	 	 	 	Obsolete Param	 
+sappfpar check_metadata pf=<profile>	 	 	 	Unknown Param	 
+sappfpar check_redefinition pf=F7P_D04_a01f7p	 	 	 	Duplicate Param
+
+############################################################
+PCK Location:
+/install/TRTEO
+
+#############################################################
+as oraf7p / f7padm
+
+Source:
+ssh-keygen -b 4098
+enter enter enter 
+cat .ssh/id_rsa.pub
+copy-paste output
+
+Destination:
+touch /home/oracle/.ssh/authorized_keys
+chmod 644 /home/oracle/.ssh/authorized_keys
+view  /home/oracle/.ssh/authorized_keys
+
+touch /home/oraf7p/.ssh/authorized_keys
+chmod 644 /home/oraf7p/.ssh/authorized_keys
+view  /home/oraf7p/.ssh/authorized_keys
+
+touch /home/f7padm/.ssh/authorized_keys
+chmod 644 /home/f7padm/.ssh/authorized_keys
+view  /home/f7padm/.ssh/authorized_keys
+
+###########################################################
+
+
+
+oracle:
+scp -rp /oracle/dsm oracle@ bsul2471:/oracle/
+scp -rp /oracle/F7P/sapbackup  bsul2471:/oracle/F7P/
+scp -rp /oracle/F7P/OWNSQL     bsul2471:/oracle/F7P/
+scp -rp /oracle/F7P/sapcheck   bsul2471:/oracle/F7P/
+scp -rp /oracle/F7P/sapprof    bsul2471:/oracle/F7P/
+scp -rp /oracle/F7P/sapreorg   bsul2471:/oracle/F7P/
+scp -rp /oracle/F7P/security   bsul2471:/oracle/F7P/
+scp -rp /oracle/F7P/saparch   bsul2471:/oracle/F7P/
+scp -rp /oracle/brtools       bsul2471:/oracle/
+
+#f7padm:
+#scp -rp /oracle/dsm bsul2471:/oracle/
+#scp -rp /oracle/client bsul2471:/oracle/
+#scp -rp /oracle/client/19x/instantclient_19000 bsul2471:/oracle/client
+#scp -rp /oracle/client/12x/instantclient_12102 bsul2471:/oracle/client
+#scp -rp /oracle/client/122/instantclient_12201 bsul2471:/oracle/client
+#scp -rp /usr/sap/WCT/W73/sec bsul2466:/usr/sap/WCT/W73/
+
+
+#scp -rp /home/f7padm bsul2512:/home
+#scp -rp /home/oraf7p bsul2471:/home
+#scp -rp /home/oracle bsul2471:/home
+
+brtools
+cd /oracle/brtools
+chown oracle:oinstall brarchive brbackup brconnect brrecover brrestore brspace
+chown f7padm:sapsys brtools
+chmod 6774 brarchive brbackup brconnect brrecover brrestore brspace
+ln -s /opt/tivoli/tsm/tdp_r3/ora64/backfm backfm
+ln -s /opt/tivoli/tsm/tdp_r3/ora64/backint backint
+##########################################################################################
+Huge Page
+grep Huge /proc/meminfo
+
+view /oracle/F7P/saptrace/diag/rdbms/f7p/F7P/trace/alert_F7P.log
+
+[3:24 PM] Kot, Marcin (Extern)
+    [root@bsul2471 ~]# grep huge /etc/sysctl.conf
+#vm.nr_hugepages = 15360
+vm.nr_hugepages = 13537
+[root@bsul2471 ~]#
+​[3:24 PM] Kot, Marcin (Extern)
+    you need to edit this value in this file
+​[3:24 PM] Kot, Marcin (Extern)
+    and then, 
+sysctl -p for activate all changes in this file
+
+###########################################################################################
+oraf7p:
+.dbenv.csh 
+#BRTools Umstellung nach /oracle/brtools
+setenv SAPEXE /oracle/brtools
+setenv PATH /oracle/brtools:/oracle/F7P/19/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/puppetlabs/bin:/usr/sap/F7P/SYS/exe/uc/linuxx86_64:/usr/sap/F7P/SYS/exe/run:/home/oraF7P:.
+
+Adjust backup:
+cd /oracle/F7P/sapprof
+view initF7P.sap
+util_par_file = /oracle/dsm/initF7P.utl
+
+#####################################################################################
+from bsux1039:
+vi /usr/isbr/bin/sapfuncs.pm
+
+[ "dbif7p_DB", "a01f7p_00", "a02f7p_00" ];
+[ "dbixct_DB", "a01xct_03", "a02xct_03" ];
+[ "dbixae_DB", "a01xct_02" ];
+
+(r>cY56GQgg4F79com3oVfiswmgxL4Sx
+/H/saprt-mgmt.fs01.vwf.vwfs-ad/H/sap-f7p.fs01.vwf.vwfs-ad
+
+gjb)4o5NdUuo}<H]NeJ5DfB8VkN-fy5Q
+Kng@8M[1ZVP@&A1}j%E&n~j-e/e{(#
+
+3500000
+1000000
+
+#################################################################################
+cd /usr/sap/hostctrl
+	chown -R root:sapsys exe 
+	chown -R sapadm:sapsys work 
+	/usr/sap/hostctrl/exe/saphostexec -restart
+	ps -ef|grep host
+	
+	oder 
+	saphostexec -stop
+	saphostexec -restart 
+
+	21. SMD	Agenten
+	cdpro Profil anpassen, neue bsul eintragen
+	/usr/sap/DAA/SMDA98/script/smdsetup.sh changeservername servername:"bsul2471"
+	sapcontrol -nr 98 -function StartService DAA
+	ps -ef|grep daa
+	ps -ef|grep host
+###################################################################################
+BRTools not working from orasid
+
+chmod 775 /oracle/F7P/19/lib/libcln*
+
+###################################################################################
+rsecssfx pf=/sapmnt/F7P/profile/DEFAULT.PFL put DB_CONNECT/DEFAULT_DB_USER SAPSR3 -plain
+
+rsecssfx pf=/sapmnt/F7P/profile/DEFAULT.PFL put DB_CONNECT/DEFAULT_DB_PASSWORD GEb_oDMICUwA3zKa
+###################################################################################
+Set Time zone  > 
+
+###################################################################################
+-rwx------ 1 oracle oinstall  80730840 May 18 03:16 libclntsh.so.19.1 
+bsul2471:oraf7p 56> pwd
+/oracle/F7P/19.0.0/lib 
+/oracle/client is only for BRTOOLS
+SQLPLUS reads from /oracle/F7P/19/lib
+
+chmod 644 /oracle/F7P/19/lib/libclntsh.so.19.1
+chmod 644 /oracle/F7P/19/lib/libclntsh.so.11.1
+##################################################################################
+sappfpar check_formula pf=F7P_D02_a01f7p	 	 	 	Formulas	
+sappfpar check_unknown pf=DEFAULT	 	 	 	Obsolete Param	 
+sappfpar check_metadata pf=DEFAULT	 	 	 	Unknown Param	 
+sappfpar check_redefinition pf=F7P_D00_a01f7p	 	 	 	Duplicate Param
+####################################################################################
+Webdisptacher:
+
+/sapmnt/W7E/global/security/data
+touch  W7E_url_perm.txt modification_rules.txt
+######################################################################################
+
+select username from dba_users where username like '%SAP%';
+$$$$$$$$$$$$$$$$$
+
+rsecssfx pf=/sapmnt/F7P/profile/DEFAULT.PFL put DB_CONNECT/DEFAULT_DB_USER SAPSR3 -plain
+
+rsecssfx pf=/sapmnt/F7P/profile/DEFAULT.PFL put DB_CONNECT/DEFAULT_DB_PASSWORD _lSr0MZWPyvkWrsW
+
+HOST=bsul2376
+HOST=bsul2393
+HOST=bsul2394
+HOST=a01f7p
+HOST=a02f7p
+HOST=ascsf7p
+HOST=127.0.0.1
+HOST=11.40.226.20
+
+
+bsul2381  
+Bsul2385 
+Bsul2386
+a01f7p
+a02f7p
+ascsf7p
+
+(10529) Starting local Command:
+ Command:  ig.sapF7P_D03
+           -mode=profile
+           pf=/usr/sap/F7P/SYS/profile/F7P_D03_a01f7p
+(10499) **** 2021/06/08 20:45:53 Child 10529 terminated with Status 255 . ****
+(10529) **** 2021/06/08 20:45:53 No RestartProgram command for program 11  ****
+
+###############################SWPM Instllation##################################
+
+cp -rp /install/TRTEO/F7P/F7SWPM /usr/sap/
+export TEMP=/usr/sap/F7SWPM/TMP
+export TMP=/usr/sap/F7SWPM/TMP
+./sapinst SAPINST_USE_HOSTNAME=ascsf7p
+./sapinst SAPINST_USE_HOSTNAME=a01f7p
+./sapinst SAPINST_USE_HOSTNAME=a02f7p
+
+/install/TRTEO/Krnl_7.22_EXT_LNX_x86_64__PPC64_SP31_CentralInstance
+
+/install/TRTEO/F7Kernel
+/install/TRTEO/Oracle19
+
+/install/TRTEO/F7P/F7Kernel
+
+cp -rp /install/TRTEO/SWPM_ForInstance /usr/sap/
+export TEMP=/usr/sap/SWPM_ForInstance/TMP
+export TMP=/usr/sap/SWPM_ForInstance/TMP
+
+export TEMP=/usr/sap/SWPM2_For_WebDisp
+export TMP=/usr/sap/SWPM2_For_WebDisp
+
+/install/TRTEO/Oracle122
+
+miez27
+
+/install/TRTEO/Krnl_7.22_EXT_LNX_x86_64__PPC64_SP31_CentralInstance
+
+##############Instal Diagnosti Agent###############
+/install/sw_supply/scripts/inst/HAG_SMDA/inst_HAG_SMDA.sh -t /usr/sap/F7P
+
+rsecssfx pf=/sapmnt/F7P/profile/DEFAULT.PFL put DB_CONNECT/DEFAULT_DB_USER SAPDAT -plain
+
+rsecssfx pf=/sapmnt/F7P/profile/DEFAULT.PFL put DB_CONNECT/DEFAULT_DB_PASSWORD Abudi40r
+
+alter user SAPSR3 identified by  "kTI_4VaxQUJ9S17w";
+alter user SYSTEM identified by  "kTI_4VaxQUJ9S17w";
+
+IDENTIFIED BY kTI_4VaxQUJ9S17w
+
+ALTER USER SAPSR3 ACCOUNT UNLOCK;
+
+21-100-002-002-Q2 
+HAP3_MigInfoSys 
+
+[‎8/‎15/‎2021 10:36 PM]  Goanta, Traian (EXTERN):  
+/H/10.34.10.1.fs01.vwf.vwfs-ad/M/sap-f7p.fs01.vwf.vwfs-ad/S/3622/G/SPACE
+
+/H/saprt-mgmt.fs01.vwf.vwfs-ad/H/sap-f7p.fs01.vwf.vwfs-ad
+13CmdKsadSuesw!
+
+The action couldn’t be completed. Please try again later. 
+
+/H/10.34.10.1/S/3299/M/sap-f7p.fs01.vwf.vwfs-ad/S/3622/G/PORTAL 

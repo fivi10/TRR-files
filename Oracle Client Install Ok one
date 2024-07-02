@@ -1,0 +1,45 @@
+cd /oracle/client/19x
+mkdir ocl_packages
+cd ocl_packages
+cp /install/sw_supply/ora/CLIENT/19/OCL_LINUX_X86_64/* .
+SAPCAR -xjf OCL1964.SAR -R .
+ls -ltr
+cd ..
+pwd
+
+su - root
+cd /oracle/client/19x
+cp ocl_packages/instantclient_19000/* instantclient_19000/
+/install/sw_supply/ora/CLIENT/19/OCL_LINUX_X86_64/* -- aici
+
+
+ln -s 19x 12
+ln -s 19x 12x
+ln -s 19x 122
+ln -s 19x 19
+ln -s 19x 11x_64
+ln -s 19x 10x_64
+
+LD_LIBRARY_PATH=/usr/sap/FKP/SYS/exe/run:/usr/sap/FKP/SYS/exe/uc/linuxx86_64:/oracle/client/19x/instantclient
+
+cd /usr/sap/trans/ENV_FKP/
+cp -rp * /home/fkpadm
+
+cp -rp .sapenv.csh .sapenv.sh .dbenv.csh .dbenv.sh /home/fkpadm/
+
+Mail wurde auch für UC4 Start verschickt
+
+Hallo zusammen,
+Die Aktualisierung des Oracle-Clients wurde erfolgreich durchgeführt.
+
+Wie wurden die Backups in M2E geplant? Wurde dies über Wechsel zum Backup-Team durchgeführt? Haben wir die Backup-Richtlinie eingeführt? Wir haben das Backup jetzt manuell gestartet
+
+
+DKX8TG3
+DKX8DME
+DKX8VWQ
+DKX84ZU
+DKX8EKN
+DKX80H6
+DKX8QA1
+DKX88FW
